@@ -32,6 +32,11 @@ const createOrder = async function (req, res) {
         let data = req.body
         let userId = req.params.userId
 
+          // AUTHORISATION
+          if (userId !== req.userId) {
+            return res.status(401).send({ status: false, msg: "Unauthorised access" })
+        }
+
         let { cartId } = data
 
         if (Object.keys(data).length == 0) {
@@ -82,6 +87,11 @@ const updateOrder = async function (req, res) {
     try {
         let userId = req.params.userId
         let data = req.body
+
+          // AUTHORISATION
+          if (userId !== req.userId) {
+            return res.status(401).send({ status: false, msg: "Unauthorised access" })
+        }
 
         let { orderId, status } = data
 
