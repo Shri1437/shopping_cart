@@ -102,9 +102,11 @@ const createCart = async function (req, res) {
                 if (cartExist.items[i].productId == items[0].productId) {
                     cartExist.items[i].quantity = cartExist.items[i].quantity + items[0].quantity
 
+                    // const totalPrice = cartExist.totalPrice + (addProduct.price * items[0].quantity)
+
                     // To increase product quantity and price
                     const cartData = await cartModel.findOneAndUpdate({ userId: userId }, { items: cartExist.items, totalPrice: totalPrice }, { new: true })
-                    return res.status(201).send({ status: true, msg: "Product successfully added", data: cartData })
+                    return res.status(200).send({ status: true, msg: "Product successfully added", data: cartData })
                 }
             }
 
@@ -112,7 +114,7 @@ const createCart = async function (req, res) {
             const totalItems = items.length + cartExist.totalItems;
 
             const addProducts = await cartModel.findOneAndUpdate({ userId: userId }, { $addToSet: { items: { $each: items } }, totalItems: totalItems, totalPrice: totalPrice }, { new: true })
-            return res.status(201).send({ status: true, data: addProducts })
+            return res.status(200).send({ status: true, data: addProducts })
         }
     }
     catch (err) {
