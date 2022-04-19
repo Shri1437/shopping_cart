@@ -11,6 +11,14 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.1116.0",
-    "module": "^1.2.5"
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "currency-symbol-map": "^5.0.1",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "module": "^1.2.5",
+    "mongoose": "^6.3.0",
+    "multer": "^1.4.4",
+    "validator": "^13.7.0"
   }
 }
