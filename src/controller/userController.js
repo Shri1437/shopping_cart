@@ -460,16 +460,16 @@ const register = async function (req, res) {
             return res.status(400).send({ status: false, message: "Pincode should be numeric and length is 6" })
         }
 
-//         //If all these validations passed , registering a user
-//         let UserData = await userModel.create(data)
-//         return res.status(201).send({ status: true, message: "You're registered successfully", data: UserData })
-//     }
+        //         //If all these validations passed , registering a user
+        //         let UserData = await userModel.create(data)
+        //         return res.status(201).send({ status: true, message: "You're registered successfully", data: UserData })
+        //     }
 
-//     //Exceptional error handling
-//     catch (error) {
-//         return res.status(500).send({ status: false, message: error.message })
-//     }
-// }
+        //     //Exceptional error handling
+        //     catch (error) {
+        //         return res.status(500).send({ status: false, message: error.message })
+        //     }
+        // }
 
         profileImage = await aws.uploadFile(files[0]);
 
@@ -575,9 +575,10 @@ const updateProfile = async (req, res) => {
         const keys = Object.keys(data);
         const file = req.files;
 
-        if (Object.keys(data).length == 0) {
+        if (Object.keys(data).length == 0 && (!file)) {
             return res.status(400).send({ status: false, message: 'Please Input Some Data' });
         }
+
 
         for (let i = 0; i < keys.length; i++) {
             if (keys[i] == '_id') {

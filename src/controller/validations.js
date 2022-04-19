@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 
 const isValidPincode = function (value) {
     if (!isNaN(value) && value.toString().length == 6) return true
@@ -22,27 +23,6 @@ let char=function(value){
     return /^[A-Za-z\s]+$/.test(value)
 }
 
-// const validString = function(value) {
-//     if (typeof value === 'string' && value.trim().length === 0) return false
-//     return true;
-// }
-
-
-
-// module.exports.isValidReqBody = isValidReqBody
-// module.exports.isValid = isValid
-// module.exports.isValidobjectId = isValidobjectId
-module.exports.isValidSizes = isValidSizes
-module.exports.isINR = isINR
-module.exports.isRs = isRs
-// module.exports.validString = validString
-
-
-
-
-
-
-const mongoose = require('mongoose')
 
 const isValid = function (value) {
     if (typeof value === 'undefined' || value === null) return false
@@ -78,7 +58,18 @@ const isvalidNum = function(value) {
     return true
 }
 
+const isValidremoveProduct = function(value) {
+    return [0,1].indexOf(value) !== -1
+}
+
+const isValidStatus = function(value) {
+    return ["pending", "completed", "cancelled"].indexOf(value) !== -1
+}
+
+
 module.exports.isValid = isValid
+module.exports.isValidremoveProduct = isValidremoveProduct
+module.exports.isValidStatus = isValidStatus
 module.exports.isvalidNum = isvalidNum
 module.exports.char = char
 module.exports.isValidPincode = isValidPincode
@@ -87,3 +78,6 @@ module.exports.isValidObjectId = isValidObjectId
 module.exports.validString = validString
 module.exports.validInstallment = validInstallment
 module.exports.validQuantity = validQuantity
+module.exports.isValidSizes = isValidSizes
+module.exports.isINR = isINR
+module.exports.isRs = isRs
