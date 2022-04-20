@@ -159,7 +159,7 @@ const updateCart = async function (req, res) {
 
         // AUTHORISATION
         if (userId !== req.userId) {
-            return res.status(401).send({ status: false, msg: "Unauthorised access" })
+            return res.status(403).send({ status: false, msg: "Unauthorised access" })
         }
 
         const { cartId, productId, removeProduct } = body
@@ -280,11 +280,11 @@ const getCart = async function (req, res) {
 
         // AUTHORISATION
         if (userId !== req.userId) {
-            return res.status(401).send({ status: false, msg: "Unauthorised access" })
+            return res.status(403).send({ status: false, msg: "Unauthorised access" })
         }
 
         // To check cart is present or not
-        const cartSearch = await cartModel.findOne({ userId })
+        const cartSearch = await cartModel.findOne({ userId})
         if (!cartSearch) {
             return res.status(400).send({ status: true, msg: "UserId does not exist" })
         }
@@ -309,19 +309,19 @@ const deleteCart = async function (req, res) {
     try {
         // Validate body (it must not be present)
         const body = req.body
-        if (validator.isValidBody(body)) {
+        if (validator.isValidRequestBody(body)) {
             return res.status(400).send({ status: false, msg: "Invalid parametes" })
         }
 
         // Validate query (it must not be present)
         const query = req.query;
-        if (validator.isValidBody(query)) {
+        if (validator.isValidRequestBody(query)) {
             return res.status(400).send({ status: false, msg: "Invalid parameters" });
         }
 
         // Validate params
         userId = req.params.userId
-        if (!validator.isValidobjectId(userId)) {
+        if (!validator.isValidObjectId(userId)) {
             return res.status(400).send({ status: false, msg: `${userId} is invalid` })
         }
 
@@ -332,8 +332,8 @@ const deleteCart = async function (req, res) {
         }
 
         // AUTHORISATION
-        if (userId !== req.user.userId) {
-            return res.status(401).send({ status: false, msg: "Unauthorised access" })
+        if (userId !== req.userId) {
+            return res.status(403).send({ status: false, msg: "Unauthorised access" })
         }
 
         // To check cart is present or not
@@ -347,7 +347,7 @@ const deleteCart = async function (req, res) {
 
     }
     catch (err) {
-        console.log("This is the error :", err.message)
+        console.log("This is the error :", err)
         res.status(500).send({ msg: "Error", error: err.message })
     }
 }
