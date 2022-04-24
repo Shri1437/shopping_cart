@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const aws = require("./awsController")
 const jwt = require("jsonwebtoken")
 const mongoose = require("mongoose")
-const saltRounds = 10;
+// const saltRounds = 10;
 
 
 
